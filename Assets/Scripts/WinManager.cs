@@ -5,11 +5,13 @@ using UnityEngine;
 public class WinManager : MonoBehaviour
 {
     public GameObject[] groups;
+    public GameObject[] bbs;
     public GameObject Trans;
     public GameObject Tips;
     AudioSource audio_source;
     public AudioClip clip;
     int id;
+    public int bbid;
     void Start()
     {
         audio_source = GetComponent<AudioSource>();
@@ -27,6 +29,16 @@ public class WinManager : MonoBehaviour
         if(id +1 >= groups.Length)
         {
             id = 0;
+            bbid++;
+            if (bbid  >= bbs.Length)
+            {
+                bbid = 0;
+            }
+            
+            foreach (var b in groups)
+            {
+                b.GetComponent<GroupManager>().bb = bbs[bbid];
+            }
         }
         else
         {
